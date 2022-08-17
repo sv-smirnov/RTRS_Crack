@@ -23,6 +23,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controller {
+
+    private boolean keyPwrBtn;
+    private Snmpman snmpman;
+
+
     @FXML
     private ResourceBundle resources;
 
@@ -74,6 +79,8 @@ public class Controller {
     @FXML
     void initialize() throws MalformedURLException {
 
+        keyPwrBtn = false;
+
         primaryPane.setBackground(Background.EMPTY);
 
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerWhite.png"))));
@@ -95,21 +102,17 @@ public class Controller {
 
     }
 
-    private boolean key=false;
 
-    private String filepath;
-
-    private Snmpman snmpman;
 
 
     @FXML
     void handleImageAction(MouseEvent event) throws MalformedURLException {
         if (event.getTarget() == powerButton) {
-            if (!key){
-                key = true;
+            if (!keyPwrBtn){
+                keyPwrBtn = true;
                 start(event);
-            } else if (key) {
-                key = false;
+            } else {
+                keyPwrBtn = false;
                 stop(event);
             }
         } else if (event.getTarget() == settingsButton) {
@@ -133,44 +136,52 @@ public class Controller {
         checkIPField(uaxteIp);
 
 
+        File walk = getWalk();
 
-        if (Integer.parseInt(power.getText()) == 0) {
-            power.setText("Enter nominal power");
-        } else if ((0 < Integer.parseInt(power.getText())) & (Integer.parseInt(power.getText()) < 50)) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/UNI10v2.walk";
-        } else  if ((50 <= Integer.parseInt(power.getText())) & (Integer.parseInt(power.getText()) < 100)) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni50v2.walk";
-        } else  if ((100 <= Integer.parseInt(power.getText())) & (Integer.parseInt(power.getText()) < 250)) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni100v2.walk";
-        } else  if ((250 <= Integer.parseInt(power.getText())) & (Integer.parseInt(power.getText()) < 500)) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni250v2.walk";
-        } else {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni500v2.walk";
-        }
-        File walk = new File(filepath);
-
-        AgentConfiguration tseConfiguration = new AgentConfiguration("tse", null, walk,
-                tseIp.getText(), Integer.parseInt(tsePort.getText()), "public");
-        SnmpmanAgent tseAgent = new SnmpmanAgent(tseConfiguration);
-
-        AgentConfiguration sxConfiguration = new AgentConfiguration("sx", null, walk,
-                sxIp.getText(), Integer.parseInt(sxPort.getText()), "public");
-        SnmpmanAgent sxAgent = new SnmpmanAgent(sxConfiguration);
-
-        AgentConfiguration uaxteConfiguration = new AgentConfiguration("uaxte", null, walk,
-                uaxteIp.getText(), Integer.parseInt(uaxtePort.getText()), "public");
-        SnmpmanAgent uaxteAgent = new SnmpmanAgent(uaxteConfiguration);
+        SnmpmanAgent tseAgent = getSnmpmanAgent("tse", walk, tseIp, tsePort);
+        SnmpmanAgent sxAgent = getSnmpmanAgent("sx", walk, sxIp, sxPort);
+        SnmpmanAgent uaxteAgent = getSnmpmanAgent("uaxte", walk, uaxteIp, uaxtePort);
 
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
         listSnmpAgent.add(0, tseAgent);
         listSnmpAgent.add(1, sxAgent);
         listSnmpAgent.add(2,uaxteAgent);
         snmpman = Snmpman.start(listSnmpAgent);
+        
+        
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOn.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
 
 
     }
+
+    private File getWalk() {
+        String filepath;
+        if (Integer.parseInt(power.getText()) <= 0) {
+            power.setText("Enter nominal power");
+            return null;
+        } else if (Integer.parseInt(power.getText()) < 50) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/UNI10v2.walk";
+        } else  if (Integer.parseInt(power.getText()) < 100) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni50v2.walk";
+        } else  if (Integer.parseInt(power.getText()) < 250) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni100v2.walk";
+        } else  if (Integer.parseInt(power.getText()) < 500) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni250v2.walk";
+        } else {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni500v2.walk";
+        }
+        File walk = new File(filepath);
+        return walk;
+    }
+
+    private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
+        AgentConfiguration agentConfiguration = new AgentConfiguration(name, null, walk,
+                ip.getText(), Integer.parseInt(port.getText()), "public");
+        return new SnmpmanAgent(agentConfiguration)
+                ;
+    }
+
     public void stop(Event actionEvent) {
         snmpman.stop();
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOff.png"))));
