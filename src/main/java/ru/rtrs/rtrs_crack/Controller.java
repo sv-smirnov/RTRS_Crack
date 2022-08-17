@@ -33,9 +33,7 @@ public class Controller {
     @FXML
     private Label statusLabel;
     @FXML
-    private Button startButton;
-    @FXML
-    private Button stopButton;
+    private ImageView settingsImage;
 
     private String filepath;
 
@@ -98,5 +96,14 @@ public class Controller {
                 }
             }
         });
+    }
+
+    @FXML
+    private void handleImageAction(MouseEvent event) {
+        if (event.getTarget() = settingsImage) {
+            if (
+                snmpman.
+            )
+        }
     }
 }
