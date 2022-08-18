@@ -19,7 +19,7 @@
 
     .textfield-design{
         -fx-background-color: #FFEBCD;
-        -fx-text-fill: 808080;
+        -fx-text-fill: #808080;
         -fx-border-color: #fafafa;
         -fx-border-width:0px 0px 0px 0px;
     }

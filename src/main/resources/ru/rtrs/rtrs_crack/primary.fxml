@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="641.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.rtrs.rtrs_crack.Controller">
+<AnchorPane fx:id="primaryPane" prefHeight="641.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.rtrs.rtrs_crack.Controller">
    <children>
-      <AnchorPane fx:id="topBar" prefHeight="85.0" prefWidth="637.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="topBar" prefHeight="81.0" prefWidth="645.0" style="-fx-background-color: #3D4956;">
          <children>
-            <ImageView fitHeight="85.0" fitWidth="41.0" layoutX="45.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/settings.png" />
-               </image></ImageView>
-            <ImageView fitHeight="85.0" fitWidth="41.0" layoutX="525.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/antennaWhite.png" />
-               </image>
+            <ImageView fx:id="settingsButton" fitHeight="41.0" fitWidth="41.0" layoutX="41.0" layoutY="22.0" onMouseClicked="#handleImageAction" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fitHeight="85.0" fitWidth="41.0" layoutX="291.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/powerOn.png" />
-               </image>
+            <ImageView fx:id="antennaImage" fitHeight="41.0" fitWidth="41.0" layoutX="525.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
+            <ImageView fx:id="powerButton" fitHeight="41.0" fitWidth="41.0" layoutX="291.0" layoutY="22.0" onMouseClicked="#handleImageAction" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="closeBtn" fitHeight="21.0" fitWidth="21.0" layoutX="610.0" layoutY="4.0" onMouseClicked="#handleImageAction" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
-      <AnchorPane fx:id="settingsBar" layoutY="102.0" prefHeight="539.0" prefWidth="637.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="settingsBar" layoutY="94.0" prefHeight="547.0" prefWidth="645.0" style="-fx-background-color: #3D4956;">
          <children>
             <Label alignment="CENTER" layoutX="73.0" layoutY="65.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Nominal Power, W:" textAlignment="CENTER" textFill="WHITE">
                <font>
