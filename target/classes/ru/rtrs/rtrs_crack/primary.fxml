@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="primaryPane" prefHeight="641.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.rtrs.rtrs_crack.Controller">
+<AnchorPane fx:id="primaryPane" prefHeight="641.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.rtrs.rtrs_crack.Controller">
    <children>
       <AnchorPane fx:id="topBar" prefHeight="81.0" prefWidth="645.0" style="-fx-background-color: #3D4956;">
          <children>
@@ -24,7 +24,7 @@
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="power" editable="false" layoutX="341.0" layoutY="63.0" prefHeight="26.0" prefWidth="165.0" promptText="100" styleClass="textfield-design" stylesheets="@style.css" text="100" />
+            <TextField fx:id="power" layoutX="341.0" layoutY="63.0" prefHeight="26.0" prefWidth="165.0" styleClass="textfield-design" stylesheets="@style.css" text="100" />
             <Label alignment="CENTER" layoutX="274.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" text="MUX-1" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Calibri" size="18.0" />
