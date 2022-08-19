@@ -178,8 +178,7 @@ public class Controller {
     private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
         AgentConfiguration agentConfiguration = new AgentConfiguration(name, null, walk,
                 ip.getText(), Integer.parseInt(port.getText()), "public");
-        return new SnmpmanAgent(agentConfiguration)
-                ;
+        return new SnmpmanAgent(agentConfiguration);
     }
 
     public void stop(Event actionEvent) {
