@@ -31,6 +31,12 @@
 
     }
 
+    .label-info-design{
+        -fx-text-fill: #eda678;
+        -fx-font-size: 15;
+
+    }
+
     .jfx-toggle-button {
          -jfx-toggle-color: #eda678;
          -jfx-untoggle-color: #FAFAFA;

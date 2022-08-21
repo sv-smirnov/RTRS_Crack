@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="primaryPane" prefHeight="641.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.rtrs.rtrs_crack.Controller">
+<AnchorPane fx:id="primaryPane" prefHeight="641.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.rtrs.rtrs_crack.Controller">
    <children>
       <AnchorPane fx:id="topBar" prefHeight="81.0" prefWidth="682.0" style="-fx-background-color: #3D4956;">
          <children>
@@ -135,6 +136,10 @@
                   <Label fx:id="mayak_power_label" alignment="CENTER" layoutX="29.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="area-design" stylesheets="@style.css" text="W" textAlignment="CENTER" textFill="WHITE" />
                </children>
             </AnchorPane>
+         </children></AnchorPane>
+      <AnchorPane fx:id="infoBar" layoutY="94.0" prefHeight="547.0" prefWidth="682.0" style="-fx-background-color: #3D4956;">
+         <children>
+            <Label fx:id="label_info" layoutX="24.0" layoutY="23.0" prefHeight="501.0" prefWidth="634.0" styleClass="label-info-design" stylesheets="@style.css" text="Label" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

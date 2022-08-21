@@ -131,6 +131,11 @@ public class Controller {
 
     @FXML
     private JFXToggleButton vfm_toggle;
+    @FXML
+    private AnchorPane infoBar;
+
+    @FXML
+    private Label label_info;
 
     @FXML
     void initialize() throws MalformedURLException {
@@ -143,6 +148,36 @@ public class Controller {
         settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
         closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/exitOrange.png"))));
+        infoBar.setVisible(false);
+        label_info.setText("""
+                RTRS_Crack
+
+                Описание проекта:
+                Эта программа является SNMP-симулятором и поддерживает возможность 
+                запуска сразу нескольких SNMP-агентов, с различными настройками.\s
+                По сути это бесплатная версия таких программ как iReasoning, 
+                Verax и Gambit.
+                
+                Программа создавалась специально под систему 
+                мониторинга РТРС и поддерживает эмуляцию передатчиков 
+                Rohde&Schwarz Tx8 и GatesAir UAXTE (шаблоны пополняются).
+                
+                Для адаптации программы под другие устройства необходимо 
+                создать соответствующий snmpwalk файл с нужными нам параметрами.
+                Оболочка приложения клиента сделана на JavaFx.
+
+                Особенности проекта:
+                - Snmpman
+                - JavaFx
+
+                Запуск приложения:
+                1. Создать сетевые адаптеры для запускаемых устройств
+                2. Запускаем клиент, настраиваем параметры SNMP агентов
+                3. Запускаем эмуляцию
+
+                https://github.com/sv-smirnov/RTRS_Crack""");
+
+
 
         tse_toggle.setSelected(true);
         sx_toggle.setSelected(true);
@@ -277,8 +312,12 @@ public class Controller {
         } else if (event.getTarget() == settingsButton) {
             if (settingsBar.isVisible()) {
                 settingsBar.setVisible(false);
+                infoBar.setVisible(true);
+                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/info.png"))));
             } else if (!settingsBar.isVisible()) {
                 settingsBar.setVisible(true);
+                infoBar.setVisible(false);
+                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
