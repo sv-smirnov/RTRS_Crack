@@ -1,5 +1,6 @@
 package ru.rtrs.rtrs_crack;
 
+import com.jfoenix.controls.JFXToggleButton;
 import com.oneandone.snmpman.Snmpman;
 import com.oneandone.snmpman.SnmpmanAgent;
 import com.oneandone.snmpman.configuration.AgentConfiguration;
@@ -14,16 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
-import com.jfoenix.controls.JFXToggleButton;
 import javafx.scene.paint.Paint;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class Controller {
 
@@ -44,16 +42,7 @@ public class Controller {
     private TextField mayakPort;
 
     @FXML
-    private Label mayak_ip_label;
-
-    @FXML
-    private Label mayak_port_label;
-
-    @FXML
     private TextField mayak_power;
-
-    @FXML
-    private Label mayak_power_label;
 
     @FXML
     private AnchorPane mayak_settings;
@@ -72,30 +61,9 @@ public class Controller {
 
     @FXML
     private TextField rrPort;
-    @FXML
-    private Label tse;
-    @FXML
-    private Label sx;
-    @FXML
-    private Label uaxte;
-    @FXML
-    private Label rr;
-    @FXML
-    private Label vfm;
-    @FXML
-    private Label mayak;
-
-    @FXML
-    private Label rr_ip_label;
-
-    @FXML
-    private Label rr_port_label;
 
     @FXML
     private TextField rr_power;
-
-    @FXML
-    private Label rr_power_label;
 
     @FXML
     private AnchorPane rr_settings;
@@ -116,31 +84,16 @@ public class Controller {
     private TextField sxPort;
 
     @FXML
-    private Label sx_ip_label;
-
-    @FXML
-    private Label sx_port_label;
-
-    @FXML
     private AnchorPane sx_settings;
 
     @FXML
     private JFXToggleButton sx_toggle;
 
     @FXML
-    private AnchorPane topBar;
-
-    @FXML
     private TextField tseIp;
 
     @FXML
     private TextField tsePort;
-
-    @FXML
-    private Label tse_ip_label;
-
-    @FXML
-    private Label tse_port_label;
 
     @FXML
     private AnchorPane tse_settings;
@@ -158,12 +111,6 @@ public class Controller {
     private TextField uaxtePort;
 
     @FXML
-    private Label uaxte_ip_label;
-
-    @FXML
-    private Label uaxte_port_label;
-
-    @FXML
     private AnchorPane uaxte_settings;
 
     @FXML
@@ -176,16 +123,7 @@ public class Controller {
     private TextField vfmPort;
 
     @FXML
-    private Label vfm_ip_label;
-
-    @FXML
-    private Label vfm_port_label;
-
-    @FXML
     private TextField vfm_power;
-
-    @FXML
-    private Label vfm_power_label;
 
     @FXML
     private AnchorPane vfm_settings;
@@ -204,10 +142,6 @@ public class Controller {
         settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
         closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/exitOrange.png"))));
-
-//        setVisibleTSE(false);
-//        setVisibleSX(false);
-//        setVisibleUAXTE(false);
 
         tse_toggle.setSelected(true);
         sx_toggle.setSelected(true);
@@ -358,15 +292,6 @@ public class Controller {
         checkIPField(sxIp);
         checkIPField(tseIp);
         checkIPField(uaxteIp);
-
-
-//        File walk = getWalk();
-//        SnmpmanAgent sxAgent = getSnmpmanAgent("sx", walk, sxIp, sxPort);
-//        SnmpmanAgent uaxteAgent = getSnmpmanAgent("uaxte", walk, uaxteIp, uaxtePort);
-//        SnmpmanAgent rrAgent = getSnmpmanAgent("rr", walk, rrIp, rrPort);
-//        SnmpmanAgent vfmAgent = getSnmpmanAgent("vfm", walk, vfmIp, vfmPort);
-//        SnmpmanAgent mayakAgent = getSnmpmanAgent("mayak", walk, mayakIp, mayakPort);
-
 
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
         if(tse_toggle.isSelected()) {
