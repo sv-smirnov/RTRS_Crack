@@ -320,9 +320,8 @@ public class Controller {
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOn.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
 
-        System.out.println(Arrays.toString(snmpman.getAgents().get(0).getServer().getContexts()));
-        System.out.println(snmpman.getAgents().get(0).getSysOID().format());
-        System.out.println(snmpman.getAgents().get(0).getSysOID().toString());
+//        System.out.println(snmpman.getAgents().get(0).getSysOID().format());
+//        System.out.println(snmpman.getAgents().get(0).getSysOID().toString());
 
 
     }
