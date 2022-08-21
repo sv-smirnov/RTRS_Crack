@@ -32,7 +32,7 @@ public class App extends Application {
             stage.setY(event.getScreenY() - yOffset);
         });
 
-        Scene scene = new Scene(root, 641, 600);
+        Scene scene = new Scene(root, 682, 641);
         scene.setFill(Color.TRANSPARENT);
 
 

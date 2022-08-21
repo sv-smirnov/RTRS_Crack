@@ -18,10 +18,27 @@
     }
 
     .textfield-design{
-        -fx-background-color: #FFEBCD;
-        -fx-text-fill: #808080;
+        -fx-background-color: #eda678;
+        -fx-text-fill: black;
         -fx-border-color: #fafafa;
         -fx-border-width:0px 0px 0px 0px;
+    }
+
+    .label-design{
+        -fx-text-fill: #eda678;
+        -fx-font-weight: bold;
+        -fx-font-size: 18;
+
+    }
+
+    .jfx-toggle-button {
+         -jfx-toggle-color: #eda678;
+         -jfx-untoggle-color: #FAFAFA;
+         -jfx-toggle-line-color: #eda478e2;
+         -jfx-untoggle-line-color: #999999;
+         -jfx-size: 10.0;
+         -jfx-disable-visual-focus: false;
+         -jfx-text-fill: #eda678;
     }
 
     .area-design .content{
