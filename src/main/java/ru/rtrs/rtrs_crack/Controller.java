@@ -20,6 +20,7 @@ import javafx.scene.paint.Paint;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -318,6 +319,10 @@ public class Controller {
 
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOn.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
+
+        System.out.println(Arrays.toString(snmpman.getAgents().get(0).getServer().getContexts()));
+        System.out.println(snmpman.getAgents().get(0).getSysOID().format());
+        System.out.println(snmpman.getAgents().get(0).getSysOID().toString());
 
 
     }
