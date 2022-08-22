@@ -1,0 +1,69 @@
+
+
+    .series{
+        -fx-stroke-width: 2px;
+        -fx-background-color: #fafafa;
+
+    }
+
+    .default-color0.chart-series-line{
+        -fx-stroke: #2E3348;
+        -fx-stroke-width: 2px;
+    }
+    .default-color1.series{-fx-stroke: #5E35B1;}
+    .default-color2.series{-fx-stroke: #EC407A;}
+
+    .default-color0.chart-line-symbol{
+        -fx-background-color: #2E3348, #ffffff;
+    }
+
+    .textfield-design{
+        -fx-background-color: #eda678;
+        -fx-text-fill: black;
+        -fx-border-color: #fafafa;
+        -fx-border-width:0px 0px 0px 0px;
+    }
+
+    .label-design{
+        -fx-text-fill: #eda678;
+        -fx-font-weight: bold;
+        -fx-font-size: 18;
+
+    }
+
+    .label-info-design{
+        -fx-text-fill: #eda678;
+        -fx-font-size: 15;
+
+    }
+
+    .jfx-toggle-button {
+         -jfx-toggle-color: #eda678;
+         -jfx-untoggle-color: #FAFAFA;
+         -jfx-toggle-line-color: #eda478e2;
+         -jfx-untoggle-line-color: #999999;
+         -jfx-size: 10.0;
+         -jfx-disable-visual-focus: false;
+         -jfx-text-fill: #eda678;
+    }
+
+    .area-design .content{
+        -fx-background-color: #2E3348;
+    }
+
+    .area-design{
+        -fx-text-fill: #fafafa;
+    }
+
+    .date-picker {
+        -fx-text-fill: #fafafa;
+    }
+
+    .date-picker .text-field {
+        -fx-control-inner-background: #2E3348;
+    }
+
+    .button-design{
+        -fx-background-color: #2E3348;
+        -fx-border-width:3px 3px 3px 3px;
+    }
