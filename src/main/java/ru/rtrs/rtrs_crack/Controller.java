@@ -190,113 +190,63 @@ public class Controller {
         tse_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(tse_toggle.isSelected()) {
-                    setVisibleTSE(true);
-                    tse_toggle.setText("On");
-                    tse_toggle.setTextFill(Paint.valueOf("#eda678"));
-                } else {
-                    setVisibleTSE(false);
-                    tse_toggle.setText("Off");
-                    tse_toggle.setTextFill(Paint.valueOf("#fafafa"));
-                }
+                ChangeToggle(tse_toggle, tse_settings);
             }
         });
 
         sx_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(sx_toggle.isSelected()) {
-                    setVisibleSX(true);
-                    sx_toggle.setText("On");
-                    sx_toggle.setTextFill(Paint.valueOf("#eda678"));
-                } else {
-                    setVisibleSX(false);
-                    sx_toggle.setText("Off");
-                    sx_toggle.setTextFill(Paint.valueOf("#fafafa"));
-                }
+                ChangeToggle(sx_toggle, sx_settings);
             }
         });
 
         uaxte_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(uaxte_toggle.isSelected()) {
-                    setVisibleUAXTE(true);
-                    uaxte_toggle.setText("On");
-                    uaxte_toggle.setTextFill(Paint.valueOf("#eda678"));
-                } else {
-                    setVisibleUAXTE(false);
-                    uaxte_toggle.setText("Off");
-                    uaxte_toggle.setTextFill(Paint.valueOf("#fafafa"));
-                }
+                ChangeToggle(uaxte_toggle, uaxte_settings);
             }
         });
 
         rr_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(rr_toggle.isSelected()) {
-                    setVisibleRR(true);
-                    rr_toggle.setText("On");
-                    rr_toggle.setTextFill(Paint.valueOf("#eda678"));
-                } else {
-                    setVisibleRR(false);
-                    rr_toggle.setText("Off");
-                    rr_toggle.setTextFill(Paint.valueOf("#fafafa"));
-                }
+                ChangeToggle(rr_toggle, rr_settings);
             }
         });
 
         vfm_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(vfm_toggle.isSelected()) {
-                    setVisibleVfm(true);
-                    vfm_toggle.setText("On");
-                    vfm_toggle.setTextFill(Paint.valueOf("#eda678"));
-                } else {
-                    setVisibleVfm(false);
-                    vfm_toggle.setText("Off");
-                    vfm_toggle.setTextFill(Paint.valueOf("#fafafa"));
-                }
+                ChangeToggle(vfm_toggle, vfm_settings);
             }
         });
 
         mayak_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(mayak_toggle.isSelected()) {
-                    setVisibleMayak(true);
-                    mayak_toggle.setText("On");
-                    mayak_toggle.setTextFill(Paint.valueOf("#eda678"));
-                } else {
-                    setVisibleMayak(false);
-                    mayak_toggle.setText("Off");
-                    mayak_toggle.setTextFill(Paint.valueOf("#fafafa"));
-                }
+                ChangeToggle(mayak_toggle, mayak_settings);
             }
+
+
         });
 
     }
+    private void ChangeToggle(JFXToggleButton tg, AnchorPane ap) {
+        if(tg.isSelected()) {
+            ap.setVisible(true);
+            setToggle(tg, "#eda678", "On");
+        } else {
+            ap.setVisible(false);
+            setToggle(tg, "#fafafa","Off");
+        }
+    }
 
-    private void setVisibleTSE(boolean b) {
-        tse_settings.setVisible(b);
+    private void setToggle(JFXToggleButton tg, String color, String text) {
+        tg.setTextFill(Paint.valueOf(color));
+        tg.setText(text);
     }
-    private void setVisibleSX(boolean b) {
-        sx_settings.setVisible(b);
-    }
-    private void setVisibleUAXTE(boolean b) {
-        uaxte_settings.setVisible(b);
-    }
-    private void setVisibleRR(boolean b) {
-        rr_settings.setVisible(b);
-    }
-    private void setVisibleVfm(boolean b) {
-        vfm_settings.setVisible(b);
-    }
-    private void setVisibleMayak(boolean b) {
-        mayak_settings.setVisible(b);
-    }
+
 
 
     @FXML
