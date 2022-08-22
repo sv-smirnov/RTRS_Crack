@@ -1,5 +1,6 @@
 package ru.rtrs.rtrs_crack;
 
+import com.jfoenix.controls.JFXToggleButton;
 import com.oneandone.snmpman.Snmpman;
 import com.oneandone.snmpman.SnmpmanAgent;
 import com.oneandone.snmpman.configuration.AgentConfiguration;
@@ -7,20 +8,21 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.paint.Paint;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class Controller {
 
@@ -29,22 +31,46 @@ public class Controller {
 
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TextField power;
-
-    @FXML
-    private ImageView powerButton;
+    private ImageView antennaImage;
 
     @FXML
     private ImageView closeBtn;
 
     @FXML
+    private TextField mayakIp;
+
+    @FXML
+    private TextField mayakPort;
+
+    @FXML
+    private TextField mayak_power;
+
+    @FXML
+    private AnchorPane mayak_settings;
+
+    @FXML
+    private JFXToggleButton mayak_toggle;
+
+    @FXML
+    private ImageView powerButton;
+
+    @FXML
     private AnchorPane primaryPane;
+
+    @FXML
+    private TextField rrIp;
+
+    @FXML
+    private TextField rrPort;
+
+    @FXML
+    private TextField rr_power;
+
+    @FXML
+    private AnchorPane rr_settings;
+
+    @FXML
+    private JFXToggleButton rr_toggle;
 
     @FXML
     private AnchorPane settingsBar;
@@ -53,16 +79,16 @@ public class Controller {
     private ImageView settingsButton;
 
     @FXML
-    private ImageView antennaImage;
-
-    @FXML
     private TextField sxIp;
 
     @FXML
     private TextField sxPort;
 
     @FXML
-    private AnchorPane topBar;
+    private AnchorPane sx_settings;
+
+    @FXML
+    private JFXToggleButton sx_toggle;
 
     @FXML
     private TextField tseIp;
@@ -71,10 +97,45 @@ public class Controller {
     private TextField tsePort;
 
     @FXML
+    private AnchorPane tse_settings;
+
+    @FXML
+    private JFXToggleButton tse_toggle;
+
+    @FXML
+    private TextField tv_power;
+
+    @FXML
     private TextField uaxteIp;
 
     @FXML
     private TextField uaxtePort;
+
+    @FXML
+    private AnchorPane uaxte_settings;
+
+    @FXML
+    private JFXToggleButton uaxte_toggle;
+
+    @FXML
+    private TextField vfmIp;
+
+    @FXML
+    private TextField vfmPort;
+
+    @FXML
+    private TextField vfm_power;
+
+    @FXML
+    private AnchorPane vfm_settings;
+
+    @FXML
+    private JFXToggleButton vfm_toggle;
+    @FXML
+    private AnchorPane infoBar;
+
+    @FXML
+    private Label label_info;
 
     @FXML
     void initialize() throws MalformedURLException {
@@ -86,22 +147,105 @@ public class Controller {
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerWhite.png"))));
         settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
-        closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/closeBtn.png"))));
+        closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/exitOrange.png"))));
+        infoBar.setVisible(false);
+        label_info.setText("""
+                RTRS_Crack
 
-        assert power != null : "fx:id=\"power\" was not injected: check your FXML file 'primary.fxml'.";
-        assert powerButton != null : "fx:id=\"powerButton\" was not injected: check your FXML file 'primary.fxml'.";
-        assert settingsBar != null : "fx:id=\"settingsBar\" was not injected: check your FXML file 'primary.fxml'.";
-        assert settingsButton != null : "fx:id=\"settingsButton\" was not injected: check your FXML file 'primary.fxml'.";
-        assert sxIp != null : "fx:id=\"sxIp\" was not injected: check your FXML file 'primary.fxml'.";
-        assert sxPort != null : "fx:id=\"sxPort\" was not injected: check your FXML file 'primary.fxml'.";
-        assert topBar != null : "fx:id=\"topBar\" was not injected: check your FXML file 'primary.fxml'.";
-        assert tseIp != null : "fx:id=\"tseIp\" was not injected: check your FXML file 'primary.fxml'.";
-        assert tsePort != null : "fx:id=\"tsePort\" was not injected: check your FXML file 'primary.fxml'.";
-        assert uaxteIp != null : "fx:id=\"uaxteIp\" was not injected: check your FXML file 'primary.fxml'.";
-        assert uaxtePort != null : "fx:id=\"uaxtePort\" was not injected: check your FXML file 'primary.fxml'.";
+                Описание проекта:
+                Эта программа является SNMP-симулятором и поддерживает возможность 
+                запуска сразу нескольких SNMP-агентов, с различными настройками.\s
+                По сути это бесплатная версия таких программ как iReasoning, 
+                Verax и Gambit.
+                
+                Программа создавалась специально под систему 
+                мониторинга РТРС и поддерживает эмуляцию передатчиков 
+                Rohde&Schwarz Tx8 и GatesAir UAXTE (шаблоны пополняются).
+                
+                Для адаптации программы под другие устройства необходимо 
+                создать соответствующий snmpwalk файл с нужными нам параметрами.
+                Оболочка приложения клиента сделана на JavaFx.
+
+                Особенности проекта:
+                - Snmpman
+                - JavaFx
+
+                Запуск приложения:
+                1. Создать сетевые адаптеры для запускаемых устройств
+                2. Запускаем клиент, настраиваем параметры SNMP агентов
+                3. Запускаем эмуляцию
+
+                https://github.com/sv-smirnov/RTRS_Crack""");
+
+
+
+        tse_toggle.setSelected(true);
+        sx_toggle.setSelected(true);
+        uaxte_toggle.setSelected(true);
+        rr_toggle.setSelected(true);
+        vfm_toggle.setSelected(true);
+        mayak_toggle.setSelected(true);
+
+        // действия по переключению кнопок JFXToggleButton
+        tse_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                ChangeToggle(tse_toggle, tse_settings);
+            }
+        });
+
+        sx_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                ChangeToggle(sx_toggle, sx_settings);
+            }
+        });
+
+        uaxte_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                ChangeToggle(uaxte_toggle, uaxte_settings);
+            }
+        });
+
+        rr_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                ChangeToggle(rr_toggle, rr_settings);
+            }
+        });
+
+        vfm_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                ChangeToggle(vfm_toggle, vfm_settings);
+            }
+        });
+
+        mayak_toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                ChangeToggle(mayak_toggle, mayak_settings);
+            }
+
+
+        });
 
     }
+    private void ChangeToggle(JFXToggleButton tg, AnchorPane ap) {
+        if(tg.isSelected()) {
+            ap.setVisible(true);
+            setToggle(tg, "#eda678", "On");
+        } else {
+            ap.setVisible(false);
+            setToggle(tg, "#fafafa","Off");
+        }
+    }
 
+    private void setToggle(JFXToggleButton tg, String color, String text) {
+        tg.setTextFill(Paint.valueOf(color));
+        tg.setText(text);
+    }
 
 
 
@@ -118,8 +262,12 @@ public class Controller {
         } else if (event.getTarget() == settingsButton) {
             if (settingsBar.isVisible()) {
                 settingsBar.setVisible(false);
+                infoBar.setVisible(true);
+                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/info.png"))));
             } else if (!settingsBar.isVisible()) {
                 settingsBar.setVisible(true);
+                infoBar.setVisible(false);
+                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
@@ -127,7 +275,7 @@ public class Controller {
     }
 
     public void start(Event actionEvent) throws MalformedURLException {
-        checkNumField(power);
+        checkNumField(tv_power);
         checkNumField(tsePort);
         checkNumField(sxPort);
         checkNumField(uaxtePort);
@@ -135,41 +283,54 @@ public class Controller {
         checkIPField(tseIp);
         checkIPField(uaxteIp);
 
-
-        File walk = getWalk();
-
-        SnmpmanAgent tseAgent = getSnmpmanAgent("tse", walk, tseIp, tsePort);
-        SnmpmanAgent sxAgent = getSnmpmanAgent("sx", walk, sxIp, sxPort);
-        SnmpmanAgent uaxteAgent = getSnmpmanAgent("uaxte", walk, uaxteIp, uaxtePort);
-
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
-        listSnmpAgent.add(0, tseAgent);
-        listSnmpAgent.add(1, sxAgent);
-        listSnmpAgent.add(2,uaxteAgent);
+        if(tse_toggle.isSelected()) {
+            listSnmpAgent.add(getSnmpmanAgent("tse", getWalk(tv_power, "tse"), tseIp, tsePort));
+        }
+        if(sx_toggle.isSelected()) {
+            listSnmpAgent.add(getSnmpmanAgent("sx", getWalk(tv_power, "sx"), sxIp, sxPort));
+        }
+        if(uaxte_toggle.isSelected()) {
+            listSnmpAgent.add(getSnmpmanAgent("uaxte", getWalk(tv_power, "uaxte"), uaxteIp, uaxtePort));
+        }
+        if(rr_toggle.isSelected()) {
+            listSnmpAgent.add(getSnmpmanAgent("rr", getWalk(rr_power, "rr"), rrIp, rrPort));
+        }
+        if(vfm_toggle.isSelected()) {
+            listSnmpAgent.add(getSnmpmanAgent("vfm", getWalk(vfm_power, "vfm"), vfmIp, vfmPort));
+        }
+        if(mayak_toggle.isSelected()) {
+            listSnmpAgent.add(getSnmpmanAgent("mayak", getWalk(mayak_power, "mayak"), mayakIp, mayakPort));
+        }
+
         snmpman = Snmpman.start(listSnmpAgent);
 
 
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOn.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
 
+//        System.out.println(snmpman.getAgents().get(0).getSysOID().format());
+//        System.out.println(snmpman.getAgents().get(0).getSysOID().toString());
+
 
     }
 
-    private File getWalk() {
+    private File getWalk(TextField pwr, String type) // файл выбирается в зависимости от типа устройства и мощности
+    {
         String filepath;
-        if (Integer.parseInt(power.getText()) <= 0) {
-            power.setText("Enter nominal power");
+        if (Integer.parseInt(pwr.getText()) <= 0) {
+            tv_power.setText("Enter nominal power");
             return null;
-        } else if (Integer.parseInt(power.getText()) < 50) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/UNI10v2.walk";
-        } else  if (Integer.parseInt(power.getText()) < 100) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni50v2.walk";
-        } else  if (Integer.parseInt(power.getText()) < 250) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni100v2.walk";
-        } else  if (Integer.parseInt(power.getText()) < 500) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni250v2.walk";
+        } else if (Integer.parseInt(pwr.getText()) < 50) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
+        } else  if (Integer.parseInt(pwr.getText()) < 100) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "50v2.walk";
+        } else  if (Integer.parseInt(pwr.getText()) < 250) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
+        } else  if (Integer.parseInt(pwr.getText()) < 500) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
         } else {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/uni500v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
         }
         File walk = new File(filepath);
         return walk;
