@@ -19,7 +19,7 @@ public class App extends Application {
     private double yOffset = 0;
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("primary.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("primaryTest.fxml")));
         // Захватывает приложение мышкой (за root.getChildrenUnmodifiable().get(0) - "topBar") по текущим координатам
         root.getChildrenUnmodifiable().get(0).setOnMousePressed(event -> {
             xOffset = event.getSceneX();

@@ -47,6 +47,27 @@
          -jfx-text-fill: #eda678;
     }
 
+    .combo-box,
+    .choice-box {
+        -fx-font-size: 18;
+        -fx-prompt-text-fill: eda678;
+        -fx-text-fill: eda678;
+        -fx-background-color:  #3D4956;
+        -fx-border-width: 0 0 0 0;
+        -fx-border-color:  #3D4956;
+        -fx-padding: 0 0 3 -8;
+    }
+
+    .combo-box .list-cell:filled:selected .text,
+    .choice-box .list-cell:filled:selected .text {
+        -fx-fill: eda678;
+    }
+
+    .combo-box .arrow,
+    .choice-box .arrow {
+        -fx-background-color: #eda678;
+    }
+
     .area-design .content{
         -fx-background-color: #2E3348;
     }
