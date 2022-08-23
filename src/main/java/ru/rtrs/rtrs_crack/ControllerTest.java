@@ -30,6 +30,9 @@ public class ControllerTest {
     private VBox vbox_device;
     @FXML
     private ImageView antennaImage;
+
+    @FXML
+    private ImageView plus;
     @FXML
     private ImageView closeBtn;
     @FXML
@@ -45,6 +48,8 @@ public class ControllerTest {
     @FXML
     private Label label_info;
 
+    private final List<Device> deviceList = new ArrayList<>();
+
     @FXML
     void initialize() throws MalformedURLException {
 
@@ -56,6 +61,8 @@ public class ControllerTest {
         settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
         closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/exitOrange.png"))));
+        plus.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/plus.png"))));
+
         infoBar.setVisible(false);
         label_info.setText("""
                 RTRS_Crack
@@ -87,6 +94,7 @@ public class ControllerTest {
 
         Device device = new Device(0);
         vbox_device.getChildren().add(device.getAnchorPane());
+        deviceList.add(device);
 
         System.out.println(device.getPower());
 
@@ -112,6 +120,9 @@ public class ControllerTest {
                 infoBar.setVisible(false);
                 settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
+        } else if (event.getTarget() == plus) {
+            vbox_device.getChildren().add(new Device(1).getAnchorPane());
+
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
         }

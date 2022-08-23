@@ -99,6 +99,7 @@ public class Device {
         anchorPane.setPrefHeight(51.0);
         anchorPane.setPrefWidth(634.0);
         anchorPane.setId("pane" + id);
+        anchorPane.setStyle("");
 
         pwrDevice = new TextField();
         pwrDevice.setLayoutX(308.0);
@@ -107,6 +108,9 @@ public class Device {
         pwrDevice.setPrefWidth(69.0);
         pwrDevice.setId("pwrDevice" + id);
         pwrDevice.setText("100");
+        pwrDevice.setStyle("-fx-text-inner-color: black;");
+        pwrDevice.setStyle("-fx-background-color: #eda678;");
+
 
         ipDevice = new TextField();
         ipDevice.setLayoutX(395.0);
@@ -115,6 +119,8 @@ public class Device {
         ipDevice.setPrefWidth(144.0);
         ipDevice.setId("ipDevice" + id);
         ipDevice.setText("192.168.250.30");
+        ipDevice.setStyle("-fx-text-inner-color: black;");
+        ipDevice.setStyle("-fx-background-color: #eda678;");
 
         portDevice = new TextField();
         portDevice.setLayoutX(566.0);
@@ -123,6 +129,8 @@ public class Device {
         portDevice.setPrefWidth(54.0);
         portDevice.setId("portDevice" + id);
         portDevice.setText("161");
+        portDevice.setStyle("-fx-text-inner-color: black;");
+        portDevice.setStyle("-fx-background-color: #eda678;");
 
         toggleButton = new JFXToggleButton();
         toggleButton.setLayoutX(223.0);

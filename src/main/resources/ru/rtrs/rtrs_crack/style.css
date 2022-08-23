@@ -19,7 +19,7 @@
 
     .textfield-design{
         -fx-background-color: #eda678;
-        -fx-text-fill: black;
+        -fx-text-fill: #eda678;
         -fx-border-color: #fafafa;
         -fx-border-width:0px 0px 0px 0px;
     }
@@ -31,11 +31,10 @@
 
     }
 
-    .label-info-design{
-        -fx-text-fill: #eda678;
-        -fx-font-size: 15;
-
+    .scroll-pane {
+        -fx-background: #3D4956;
     }
+
 
     .jfx-toggle-button {
          -jfx-toggle-color: #eda678;

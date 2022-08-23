@@ -19,7 +19,7 @@
 
     .textfield-design{
         -fx-background-color: #eda678;
-        -fx-text-fill: black;
+        -fx-text-fill: #eda678;
         -fx-border-color: #fafafa;
         -fx-border-width:0px 0px 0px 0px;
     }
@@ -31,11 +31,10 @@
 
     }
 
-    .label-info-design{
-        -fx-text-fill: #eda678;
-        -fx-font-size: 15;
-
+    .scroll-pane {
+        -fx-background: #3D4956;
     }
+
 
     .jfx-toggle-button {
          -jfx-toggle-color: #eda678;
@@ -45,6 +44,27 @@
          -jfx-size: 10.0;
          -jfx-disable-visual-focus: false;
          -jfx-text-fill: #eda678;
+    }
+
+    .combo-box,
+    .choice-box {
+        -fx-font-size: 18;
+        -fx-prompt-text-fill: eda678;
+        -fx-text-fill: eda678;
+        -fx-background-color:  #3D4956;
+        -fx-border-width: 0 0 0 0;
+        -fx-border-color:  #3D4956;
+        -fx-padding: 0 0 3 -8;
+    }
+
+    .combo-box .list-cell:filled:selected .text,
+    .choice-box .list-cell:filled:selected .text {
+        -fx-fill: eda678;
+    }
+
+    .combo-box .arrow,
+    .choice-box .arrow {
+        -fx-background-color: #eda678;
     }
 
     .area-design .content{
