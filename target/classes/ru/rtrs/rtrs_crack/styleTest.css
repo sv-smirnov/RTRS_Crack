@@ -19,7 +19,7 @@
 
     .textfield-design{
         -fx-background-color: #eda678;
-        -fx-text-fill: Black;
+        -fx-text-fill: #eda678;
         -fx-border-color: #fafafa;
         -fx-border-width:0px 0px 0px 0px;
     }
@@ -28,12 +28,6 @@
         -fx-text-fill: #eda678;
         -fx-font-weight: bold;
         -fx-font-size: 18;
-
-    }
-
-    .label-info-design{
-        -fx-text-fill: #eda678;
-        -fx-font-size: 15;
 
     }
 

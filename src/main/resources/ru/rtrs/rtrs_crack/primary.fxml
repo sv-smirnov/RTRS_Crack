@@ -141,7 +141,5 @@
          <children>
             <Label fx:id="label_info" layoutX="24.0" layoutY="23.0" prefHeight="501.0" prefWidth="634.0" styleClass="label-info-design" stylesheets="@style.css" text="Label" />
          </children></AnchorPane>
-      <AnchorPane fx:id="infoBar1" layoutY="94.0" prefHeight="547.0" prefWidth="682.0" style="-fx-background-color: #3D4956;">
-         </AnchorPane>
    </children>
 </AnchorPane>

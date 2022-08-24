@@ -3,22 +3,30 @@ package ru.rtrs.rtrs_crack;
 import com.jfoenix.controls.JFXToggleButton;
 import com.oneandone.snmpman.Snmpman;
 import com.oneandone.snmpman.SnmpmanAgent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import com.oneandone.snmpman.configuration.AgentConfiguration;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ControllerTest {
@@ -48,10 +56,38 @@ public class ControllerTest {
     @FXML
     private Label label_info;
 
-    private final List<Device> deviceList = new ArrayList<>();
+    private HashMap<String, Device> deviceList = new HashMap<String, Device>();
+    private ToggleGroup toggleGroup = new ToggleGroup();
+
+    @FXML
+    void getOnAction(MouseEvent event) throws MalformedURLException {
+        if (event.getTarget() == powerButton) {
+            if (!keyPwrBtn){
+                keyPwrBtn = true;
+                start(event);
+            } else {
+                keyPwrBtn = false;
+                stop(event);
+            }
+        } else if (event.getTarget() == settingsButton) {
+            if (settingsBar.isVisible()) {
+                settingsBar.setVisible(false);
+                infoBar.setVisible(true);
+                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/info.png"))));
+            } else if (!settingsBar.isVisible()) {
+                settingsBar.setVisible(true);
+                infoBar.setVisible(false);
+                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
+            }
+        } else if (event.getTarget() == closeBtn) {
+            System.exit(0);
+        }
+    }
 
     @FXML
     void initialize() throws MalformedURLException {
+
+        
 
         keyPwrBtn = false;
 
@@ -92,12 +128,63 @@ public class ControllerTest {
 
                 https://github.com/sv-smirnov/RTRS_Crack""");
 
-        Device device = new Device(0);
+        Device device = new Device(deviceList.size(), toggleGroup);
         vbox_device.getChildren().add(device.getAnchorPane());
-        deviceList.add(device);
+        deviceList.put(Integer.toString(deviceList.size()), device);
 
         System.out.println(device.getPower());
 
+        deviceList.forEach((k, v) -> {
+            System.out.println(k + " " + v);
+        });
+        
+        
+
+        System.out.println(toggleGroup.getToggles());
+        toggleGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) -> {
+            System.out.println(new_toggle);
+            if (new_toggle == null) {
+                ToggleButton tg = (ToggleButton) toggleGroup.getSelectedToggle(); 
+                System.out.println(tg.getId());
+
+                if (tg.isSelected()) {
+                    String n = tg.getId().substring(11);
+                    System.out.println(n);
+                    
+                    deviceList.get(n).getToggleButton().selectedProperty().addListener(new ChangeListener<Boolean>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                            ChangeToggle(deviceList.get(n));
+                        };
+                    });
+                    
+
+                }
+            }
+        });
+
+
+    }
+
+    private void ChangeToggle(Device d) {
+        if(d.getToggleButton().isSelected()) {
+            d.getComboBox().setVisible(true);
+            d.getPwrDevice().setVisible(true);
+            d.getIpDevice().setVisible(true);
+            d.getPortDevice().setVisible(true);
+            setToggle(d.getToggleButton(), "#eda678", "On");
+        } else {
+            d.getComboBox().setVisible(false);
+            d.getPwrDevice().setVisible(false);
+            d.getIpDevice().setVisible(false);
+            d.getPortDevice().setVisible(false);
+            setToggle(d.getToggleButton(), "#fafafa","Off");
+        }
+    }
+
+    private void setToggle(JFXToggleButton tg, String color, String text) {
+        tg.setTextFill(Paint.valueOf(color));
+        tg.setText(text);
     }
 
     @FXML
@@ -121,7 +208,7 @@ public class ControllerTest {
                 settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == plus) {
-            vbox_device.getChildren().add(new Device(1).getAnchorPane());
+            vbox_device.getChildren().add(new Device(deviceList.size(), toggleGroup).getAnchorPane());
 
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
