@@ -1,19 +1,12 @@
-package ru.rtrs.rtrs_crack;
+package ru.rtrs.rtrs_crack.newUI;
 
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
 
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Objects;
 
 public class Device {
@@ -28,47 +21,16 @@ public class Device {
     private TextField portDevice;
     private JFXToggleButton toggleButton;
     private ComboBox<TypeDevice> comboBox;
-    private ToggleGroup toggleGroup;
-
     public AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
-    public Device(int id, ToggleGroup toggleGroup) {
+    public Device(int id) {
         anchorPane = addDevice(id);
-        this.toggleGroup = toggleGroup;
-    }
-
-    public Device(TypeDevice typeDevice, String power, String ip, String port, boolean editable) {
-        this.typeDevice = typeDevice;
-        this.power = power;
-        this.ip = ip;
-        this.port = port;
-        this.editable = editable;
     }
 
     public TypeDevice getTypeDevice() {
-        return typeDevice;
-    }
-
-    public String getPower() {
-        return power;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
+        return comboBox.getValue();
     }
 
     public void setSettings() {
@@ -76,7 +38,6 @@ public class Device {
         ip = getIpDevice().getText();
         port = getPortDevice().getText();
         typeDevice = getTypeDevice();
-
     }
 
     public TextField getPwrDevice() {
@@ -103,7 +64,7 @@ public class Device {
 
         anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(51.0);
-        anchorPane.setPrefWidth(634.0);
+        anchorPane.setPrefWidth(600.0);
         anchorPane.setId("pane" + id);
         anchorPane.setStyle("");
 
@@ -138,24 +99,13 @@ public class Device {
         portDevice.setStyle("-fx-text-inner-color: black;");
         portDevice.setStyle("-fx-background-color: #eda678;");
 
-        toggleButton = new JFXToggleButton();
-        toggleButton.setToggleGroup(toggleGroup);
-        toggleButton.setLayoutX(223.0);
-        toggleButton.setPrefHeight(24.0);
-        toggleButton.setPrefWidth(57.0);
-        toggleButton.setId("toggleButton" + id);
-        toggleButton.setText("On");
-        toggleButton.getStylesheets().add(Objects.requireNonNull(Device.class.getResource("/ru/rtrs/rtrs_crack/styleTest.css")).toExternalForm());
-        toggleButton.setStyle(".jfx-toggle-button");
-
-
         comboBox = new ComboBox<>();
-        comboBox.setLayoutX(4.0);
-        comboBox.setLayoutY(17.0);
+        comboBox.setLayoutX(0.0);
+        comboBox.setLayoutY(14.0);
         comboBox.setPrefHeight(24.0);
-        comboBox.setPrefWidth(213.0);
+        comboBox.setPrefWidth(200.0);
         comboBox.getItems().addAll(Arrays.asList(TypeDevice.values()));
-        comboBox.setPromptText(TypeDevice.Microtec30.toString());
+        comboBox.setPromptText(TypeDevice.values()[0].toString());
         comboBox.setId("comboBox" + id);
         comboBox.getStylesheets().add(Objects.requireNonNull(Device.class.getResource("/ru/rtrs/rtrs_crack/styleTest.css")).toExternalForm());
         comboBox.setStyle(".combo-box");
@@ -165,12 +115,46 @@ public class Device {
         anchorPane.getChildren().add(portDevice);
         anchorPane.getChildren().add(pwrDevice);
 
+        toggleButton = new JFXToggleButton();
+        toggleButton.setLayoutX(200.0);
+        toggleButton.setPrefHeight(24.0);
+        toggleButton.setPrefWidth(100.0);
+        toggleButton.setId("toggleButton" + id);
+        toggleButton.setSelected(true);
+        toggleButton.setTextFill(Paint.valueOf("#eda678"));
+        toggleButton.setText("On");
+        toggleButton.getStylesheets().add(Objects.requireNonNull(Device.class.getResource("/ru/rtrs/rtrs_crack/styleTest.css")).toExternalForm());
+        toggleButton.setStyle(".jfx-toggle-button");
+        toggleButton.setOnAction(e -> {
+            ChangeToggle();
+        });
         anchorPane.getChildren().add(toggleButton);
-
-
 
         return anchorPane;
 
     }
+
+    private void ChangeToggle() {
+        if(toggleButton.isSelected()) {
+            comboBox.setDisable(false);
+            pwrDevice.setDisable(false);
+            ipDevice.setDisable(false);
+            portDevice.setDisable(false);
+            setToggle(toggleButton, "#eda678", "On");
+        } else {
+            comboBox.setDisable(true);
+            pwrDevice.setDisable(true);
+            ipDevice.setDisable(true);
+            portDevice.setDisable(true);
+            setToggle(toggleButton, "#fafafa","Off");
+        }
+    }
+
+    private void setToggle(JFXToggleButton tg, String color, String text) {
+        tg.setTextFill(Paint.valueOf(color));
+        tg.setText(text);
+    }
+
+
 
 }

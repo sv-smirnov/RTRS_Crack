@@ -41,14 +41,15 @@
          -jfx-untoggle-color: #FAFAFA;
          -jfx-toggle-line-color: #eda478e2;
          -jfx-untoggle-line-color: #999999;
-         -jfx-size: 10.0;
+         -jfx-size: 8.0;
          -jfx-disable-visual-focus: false;
          -jfx-text-fill: #eda678;
     }
 
     .combo-box,
     .choice-box {
-        -fx-font-size: 18;
+        -fx-font-size: 16;
+        -fx-font-weight: bold;
         -fx-prompt-text-fill: eda678;
         -fx-text-fill: eda678;
         -fx-background-color:  #3D4956;

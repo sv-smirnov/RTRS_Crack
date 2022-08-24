@@ -1,12 +1,8 @@
-package ru.rtrs.rtrs_crack;
+package ru.rtrs.rtrs_crack.newUI;
 
 public enum TypeDevice {
 
-    Microtec30,
-    Microtec100,
-    Microtec250,
-    Microtec500,
-    Microtec1000,
+    Microtech_TF,
     RS_Tx8,
     TSE800,
     Sx_SLx,

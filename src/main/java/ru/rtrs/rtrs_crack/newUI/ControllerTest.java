@@ -1,32 +1,24 @@
-package ru.rtrs.rtrs_crack;
+package ru.rtrs.rtrs_crack.newUI;
 
-import com.jfoenix.controls.JFXToggleButton;
 import com.oneandone.snmpman.Snmpman;
 import com.oneandone.snmpman.SnmpmanAgent;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import com.oneandone.snmpman.configuration.AgentConfiguration;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class ControllerTest {
@@ -57,37 +49,10 @@ public class ControllerTest {
     private Label label_info;
 
     private HashMap<String, Device> deviceList = new HashMap<String, Device>();
-    private ToggleGroup toggleGroup = new ToggleGroup();
+
 
     @FXML
-    void getOnAction(MouseEvent event) throws MalformedURLException {
-        if (event.getTarget() == powerButton) {
-            if (!keyPwrBtn){
-                keyPwrBtn = true;
-                start(event);
-            } else {
-                keyPwrBtn = false;
-                stop(event);
-            }
-        } else if (event.getTarget() == settingsButton) {
-            if (settingsBar.isVisible()) {
-                settingsBar.setVisible(false);
-                infoBar.setVisible(true);
-                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/info.png"))));
-            } else if (!settingsBar.isVisible()) {
-                settingsBar.setVisible(true);
-                infoBar.setVisible(false);
-                settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
-            }
-        } else if (event.getTarget() == closeBtn) {
-            System.exit(0);
-        }
-    }
-
-    @FXML
-    void initialize() throws MalformedURLException {
-
-        
+    void initialize() {
 
         keyPwrBtn = false;
 
@@ -128,68 +93,12 @@ public class ControllerTest {
 
                 https://github.com/sv-smirnov/RTRS_Crack""");
 
-        Device device = new Device(deviceList.size(), toggleGroup);
-        vbox_device.getChildren().add(device.getAnchorPane());
-        deviceList.put(Integer.toString(deviceList.size()), device);
-
-        System.out.println(device.getPower());
-
-        deviceList.forEach((k, v) -> {
-            System.out.println(k + " " + v);
-        });
-        
-        
-
-        System.out.println(toggleGroup.getToggles());
-        toggleGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) -> {
-            System.out.println(new_toggle);
-            if (new_toggle == null) {
-                ToggleButton tg = (ToggleButton) toggleGroup.getSelectedToggle(); 
-                System.out.println(tg.getId());
-
-                if (tg.isSelected()) {
-                    String n = tg.getId().substring(11);
-                    System.out.println(n);
-                    
-                    deviceList.get(n).getToggleButton().selectedProperty().addListener(new ChangeListener<Boolean>() {
-                        @Override
-                        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                            ChangeToggle(deviceList.get(n));
-                        };
-                    });
-                    
-
-                }
-            }
-        });
-
-
-    }
-
-    private void ChangeToggle(Device d) {
-        if(d.getToggleButton().isSelected()) {
-            d.getComboBox().setVisible(true);
-            d.getPwrDevice().setVisible(true);
-            d.getIpDevice().setVisible(true);
-            d.getPortDevice().setVisible(true);
-            setToggle(d.getToggleButton(), "#eda678", "On");
-        } else {
-            d.getComboBox().setVisible(false);
-            d.getPwrDevice().setVisible(false);
-            d.getIpDevice().setVisible(false);
-            d.getPortDevice().setVisible(false);
-            setToggle(d.getToggleButton(), "#fafafa","Off");
-        }
-    }
-
-    private void setToggle(JFXToggleButton tg, String color, String text) {
-        tg.setTextFill(Paint.valueOf(color));
-        tg.setText(text);
+        vbox_device.getChildren().add(new Device(deviceList.size()).getAnchorPane());
     }
 
     @FXML
-    void handleImageAction(MouseEvent event) throws MalformedURLException {
-        if (event.getTarget() == powerButton) {
+    void handleImageAction(MouseEvent event) throws MalformedURLException { // Реакция на нажатие на кнопки
+        if (event.getTarget() == powerButton) { // Кнопка Старт
             if (!keyPwrBtn){
                 keyPwrBtn = true;
                 start(event);
@@ -197,7 +106,7 @@ public class ControllerTest {
                 keyPwrBtn = false;
                 stop(event);
             }
-        } else if (event.getTarget() == settingsButton) {
+        } else if (event.getTarget() == settingsButton) { // Кнопка переключения между настройками и информацией о программе
             if (settingsBar.isVisible()) {
                 settingsBar.setVisible(false);
                 infoBar.setVisible(true);
@@ -208,7 +117,7 @@ public class ControllerTest {
                 settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == plus) {
-            vbox_device.getChildren().add(new Device(deviceList.size(), toggleGroup).getAnchorPane());
+            vbox_device.getChildren().add(new Device(deviceList.size()).getAnchorPane());
 
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
@@ -217,33 +126,50 @@ public class ControllerTest {
 
     public void start(Event actionEvent) throws MalformedURLException {
 
-//        System.out.println(snmpman.getAgents().get(0).getSysOID().format());
-//        System.out.println(snmpman.getAgents().get(0).getSysOID().toString());
+        List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
 
+        deviceList.forEach((k, v) -> {
+            v.setSettings(); // записываем настройки в <Device>device
+            if(v.getToggleButton().isSelected()) {
+                listSnmpAgent.add(getSnmpmanAgent(v.getTypeDevice().toString() + "." + k,
+                        getWalk(v),
+                        v.getIpDevice(),
+                        v.getPortDevice()));
+            }
+        });
+
+        snmpman = Snmpman.start(listSnmpAgent);
+
+
+        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOn.png"))));
+        antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
 
     }
 
-    private File getWalk(TextField pwr, String type) // файл выбирается в зависимости от типа устройства и мощности
+    private File getWalk(Device v) // файл выбирается в зависимости от типа устройства и мощности
     {
-//        String filepath;
-//        if (Integer.parseInt(pwr.getText()) <= 0) {
-//            tv_power.setText("Enter nominal power");
-//            return null;
-//        } else if (Integer.parseInt(pwr.getText()) < 50) {
-//            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
-//        } else  if (Integer.parseInt(pwr.getText()) < 100) {
-//            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "50v2.walk";
-//        } else  if (Integer.parseInt(pwr.getText()) < 250) {
-//            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
-//        } else  if (Integer.parseInt(pwr.getText()) < 500) {
-//            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
-//        } else {
-//            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
-//        }
-//        File walk = new File(filepath);
-//        return walk;
 
-        return null;
+        int pwr = Integer.parseInt(v.getPortDevice().getText());
+        String type = v.getTypeDevice().toString();
+
+        String filepath;
+        if (pwr <= 0) {
+            v.getPwrDevice().setText("Enter nominal power");
+            return null;
+        } else if (pwr < 50) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
+        } else  if (pwr < 100) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "50v2.walk";
+        } else  if (pwr < 250) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
+        } else  if (pwr < 500) {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
+        } else {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
+        }
+        File walk = new File(filepath);
+        return walk;
+
     }
 
     private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
