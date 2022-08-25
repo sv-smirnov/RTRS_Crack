@@ -58,10 +58,10 @@ public class ControllerTest {
 
         primaryPane.setBackground(Background.EMPTY);
 
-        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerWhite.png"))));
+        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_orange.png"))));
         settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
-        closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/exitOrange.png"))));
+        closeBtn.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/close_red.png"))));
         plus.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/plus.png"))));
 
         infoBar.setVisible(false);
@@ -141,16 +141,16 @@ public class ControllerTest {
         snmpman = Snmpman.start(listSnmpAgent);
 
 
-        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOn.png"))));
+        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_green.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
 
     }
 
     private File getWalk(Device v) // файл выбирается в зависимости от типа устройства и мощности
     {
-
         int pwr = Integer.parseInt(v.getPortDevice().getText());
-        String type = v.getTypeDevice().toString().substring(v.getTypeDevice().toString().indexOf('_') + 1);
+        String type = v.getTypeDevice().
+                toString().substring(v.getTypeDevice().toString().indexOf('_') + 1); // Тип оборудования после нижнего подчеркивания TypeDevice
 
         String filepath;
         if (pwr <= 0) {
@@ -169,7 +169,6 @@ public class ControllerTest {
         }
         File walk = new File(filepath);
         return walk;
-
     }
 
     private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
@@ -180,8 +179,8 @@ public class ControllerTest {
 
     public void stop(Event actionEvent) {
         snmpman.stop();
-        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/powerOff.png"))));
-        antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaRed.png"))));
+        powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_orange.png"))));
+        antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
 
     }
 
