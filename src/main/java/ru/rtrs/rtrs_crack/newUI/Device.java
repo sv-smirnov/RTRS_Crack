@@ -2,6 +2,7 @@ package ru.rtrs.rtrs_crack.newUI;
 
 import com.jfoenix.controls.JFXToggleButton;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
@@ -128,7 +129,12 @@ public class Device {
         anchorPane.getChildren().add(portDevice);
         anchorPane.getChildren().add(pwrDevice);
         anchorPane.getChildren().add(toggleButton);
-        System.out.println(getTypeDevice().toString().substring(getTypeDevice().toString().indexOf('_') + 1));
+
+        comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue == TypeDevice.RS_TSE800) {
+                pwrDevice.setDisable(true);
+            }
+        });
 
         return anchorPane;
 
