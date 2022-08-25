@@ -16,5 +16,6 @@
 2. Запускаем клиент, настраиваем параметры SNMP агентов
 3. Запускаем эмуляцию
 
-![RTRS_Crack](https://user-images.githubusercontent.com/93668694/185557534-5c5cc91a-fc8c-45d7-9629-ea523a328fd0.PNG)
+![image](https://user-images.githubusercontent.com/57046083/186740794-898ab207-32dc-489a-842b-ef241a1aff46.png)
+
 
