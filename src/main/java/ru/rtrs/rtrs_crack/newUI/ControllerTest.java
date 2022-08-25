@@ -150,7 +150,7 @@ public class ControllerTest {
     {
 
         int pwr = Integer.parseInt(v.getPortDevice().getText());
-        String type = v.getTypeDevice().toString();
+        String type = v.getTypeDevice().toString().substring(v.getTypeDevice().toString().indexOf('_') + 1);
 
         String filepath;
         if (pwr <= 0) {

@@ -2,14 +2,14 @@ package ru.rtrs.rtrs_crack.newUI;
 
 public enum TypeDevice {
 
-    Microtech_TF,
-    RS_Tx8,
-    TSE800,
-    Sx_SLx,
+    Microtec_TF,
+    Microtec_TTUD,
+    RS_TSE800,
+    RS_SxSLx,
+    RS_Tx9,
     GatesAir_UAXTE,
     Harris_UAX,
     Harris_ULX,
-    RS_Tx9,
-    Vigintos,
-    Almaz_Antey
+    Vigintos_TVD,
+    AlmazAntey_HCDVB
 }

@@ -15,7 +15,7 @@
             </ImageView>
             <ImageView fx:id="antennaImage" fitHeight="41.0" fitWidth="41.0" layoutX="500.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="powerButton" fitHeight="41.0" fitWidth="41.0" layoutX="341.0" layoutY="22.0" onMouseClicked="#handleImageAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="powerButton" fitHeight="41.0" fitWidth="41.0" layoutX="309.0" layoutY="22.0" onMouseClicked="#handleImageAction" pickOnBounds="true" preserveRatio="true">
             </ImageView>
             <ImageView fx:id="closeBtn" fitHeight="68.0" fitWidth="87.0" layoutX="586.0" layoutY="7.0" onMouseClicked="#handleImageAction" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>

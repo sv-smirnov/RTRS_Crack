@@ -50,17 +50,26 @@
     .choice-box {
         -fx-font-size: 16;
         -fx-font-weight: bold;
-        -fx-prompt-text-fill: eda678;
-        -fx-text-fill: eda678;
+        -fx-prompt-text-fill: #eda678;
+        -fx-text-fill: #eda678;
         -fx-background-color:  #3D4956;
         -fx-border-width: 0 0 0 0;
         -fx-border-color:  #3D4956;
         -fx-padding: 0 0 3 -8;
     }
 
+    .combo-box:hover{
+        -fx-background-color: #3D4956;
+        -fx-text-fill: #3D4956;
+    }
+
+    .combo:showing > .arrow-button {
+        -fx-color: red;
+    }
+
     .combo-box .list-cell:filled:selected .text,
     .choice-box .list-cell:filled:selected .text {
-        -fx-fill: eda678;
+        -fx-text-fill: #eda678;
     }
 
     .combo-box .arrow,

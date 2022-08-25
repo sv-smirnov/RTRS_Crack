@@ -62,12 +62,6 @@ public class Device {
 
     public AnchorPane addDevice(Integer id) {
 
-        anchorPane = new AnchorPane();
-        anchorPane.setPrefHeight(51.0);
-        anchorPane.setPrefWidth(600.0);
-        anchorPane.setId("pane" + id);
-        anchorPane.setStyle("");
-
         pwrDevice = new TextField();
         pwrDevice.setLayoutX(308.0);
         pwrDevice.setLayoutY(14.0);
@@ -77,7 +71,6 @@ public class Device {
         pwrDevice.setText("100");
         pwrDevice.setStyle("-fx-text-inner-color: black;");
         pwrDevice.setStyle("-fx-background-color: #eda678;");
-
 
         ipDevice = new TextField();
         ipDevice.setLayoutX(395.0);
@@ -105,15 +98,11 @@ public class Device {
         comboBox.setPrefHeight(24.0);
         comboBox.setPrefWidth(200.0);
         comboBox.getItems().addAll(Arrays.asList(TypeDevice.values()));
-        comboBox.setPromptText(TypeDevice.values()[0].toString());
+        comboBox.setPromptText("Select hardware");
+        comboBox.setValue(TypeDevice.values()[0]);
         comboBox.setId("comboBox" + id);
         comboBox.getStylesheets().add(Objects.requireNonNull(Device.class.getResource("/ru/rtrs/rtrs_crack/styleTest.css")).toExternalForm());
         comboBox.setStyle(".combo-box");
-
-        anchorPane.getChildren().add(comboBox);
-        anchorPane.getChildren().add(ipDevice);
-        anchorPane.getChildren().add(portDevice);
-        anchorPane.getChildren().add(pwrDevice);
 
         toggleButton = new JFXToggleButton();
         toggleButton.setLayoutX(200.0);
@@ -128,7 +117,18 @@ public class Device {
         toggleButton.setOnAction(e -> {
             ChangeToggle();
         });
+
+        anchorPane = new AnchorPane();
+        anchorPane.setPrefHeight(51.0);
+        anchorPane.setPrefWidth(600.0);
+        anchorPane.setId("pane" + id);
+        anchorPane.setStyle("");
+        anchorPane.getChildren().add(comboBox);
+        anchorPane.getChildren().add(ipDevice);
+        anchorPane.getChildren().add(portDevice);
+        anchorPane.getChildren().add(pwrDevice);
         anchorPane.getChildren().add(toggleButton);
+        System.out.println(getTypeDevice().toString().substring(getTypeDevice().toString().indexOf('_') + 1));
 
         return anchorPane;
 
