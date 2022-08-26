@@ -101,10 +101,13 @@ public class ControllerTest {
         if (event.getTarget() == powerButton) { // Кнопка Старт
             if (!keyPwrBtn){
                 keyPwrBtn = true;
+                settingsBar.getChildren().get(0).setDisable(true);
                 start(event);
             } else {
                 keyPwrBtn = false;
                 stop(event);
+                settingsBar.getChildren().get(0).setDisable(false);
+
             }
         } else if (event.getTarget() == settingsButton) { // Кнопка переключения между настройками и информацией о программе
             if (settingsBar.isVisible()) {

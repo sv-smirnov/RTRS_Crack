@@ -132,6 +132,7 @@ public class Device {
 
         comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue == TypeDevice.RS_TSE800) {
+                pwrDevice.setText("none");
                 pwrDevice.setDisable(true);
             }
         });
