@@ -8,4 +8,6 @@ module ru.rtrs.rtrs_crack {
 
     opens ru.rtrs.rtrs_crack to javafx.fxml;
     exports ru.rtrs.rtrs_crack;
+    exports ru.rtrs.rtrs_crack.newUI;
+    opens ru.rtrs.rtrs_crack.newUI to javafx.fxml;
 }
