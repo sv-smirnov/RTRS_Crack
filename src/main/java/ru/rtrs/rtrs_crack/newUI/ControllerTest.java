@@ -54,6 +54,8 @@ public class ControllerTest {
     @FXML
     void initialize() {
 
+        System.out.println("start");
+
         keyPwrBtn = false;
 
         primaryPane.setBackground(Background.EMPTY);
@@ -65,35 +67,30 @@ public class ControllerTest {
         plus.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/plus.png"))));
 
         infoBar.setVisible(false);
-        label_info.setText("""
-                RTRS_Crack
-
-                Описание проекта:
-                Эта программа является SNMP-симулятором и поддерживает возможность 
-                запуска сразу нескольких SNMP-агентов, с различными настройками.\s
-                По сути это бесплатная версия таких программ как iReasoning, 
-                Verax и Gambit.
-                
-                Программа создавалась специально под систему 
-                мониторинга РТРС и поддерживает эмуляцию передатчиков 
-                Rohde&Schwarz Tx8 и GatesAir UAXTE (шаблоны пополняются).
-                
-                Для адаптации программы под другие устройства необходимо 
-                создать соответствующий snmpwalk файл с нужными нам параметрами.
-                Оболочка приложения клиента сделана на JavaFx.
-
-                Особенности проекта:
-                - Snmpman
-                - JavaFx
-
-                Запуск приложения:
-                1. Создать сетевые адаптеры для запускаемых устройств
-                2. Запускаем клиент, настраиваем параметры SNMP агентов
-                3. Запускаем эмуляцию
-
-                https://github.com/sv-smirnov/RTRS_Crack""");
-
-        vbox_device.getChildren().add(new Device(deviceList.size()).getAnchorPane());
+        label_info.setText("" +
+                "RTRS_Crack\n" +
+                "Описание проекта:\n" +
+                "Эта программа является SNMP-симулятором и поддерживает возможность \n" +
+                "запуска сразу нескольких SNMP-агентов, с различными настройками.\n " +
+                "По сути это бесплатная версия таких программ как iReasoning,\n " +
+                "Verax и Gambit.\n " +
+                "Программа создавалась специально под систему \n " +
+                "мониторинга РТРС и поддерживает эмуляцию передатчиков \n " +
+                "Rohde&Schwarz Tx8 и GatesAir UAXTE (шаблоны пополняются).\n " +
+                "Для адаптации программы под другие устройства необходимо\n " +
+                "создать соответствующий snmpwalk файл с нужными нам параметрами.\n " +
+                "Оболочка приложения клиента сделана на JavaFx.\n " +
+                "Особенности проекта:\n " +
+                "- Snmpman\n " +
+                "- JavaFx\n " +
+                "Запуск приложения:\n " +
+                "1. Создать сетевые адаптеры для запускаемых устройств\n " +
+                "2. Запускаем клиент, настраиваем параметры SNMP агентов\n " +
+                "3. Запускаем эмуляцию\n " +
+                "https://github.com/sv-smirnov/RTRS_Crack");
+        Device device = new Device(deviceList.size());
+        deviceList.put("0", device);
+        vbox_device.getChildren().add(device.getAnchorPane());
     }
 
     @FXML
@@ -120,7 +117,11 @@ public class ControllerTest {
                 settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == plus) {
-            vbox_device.getChildren().add(new Device(deviceList.size()).getAnchorPane());
+            System.out.println(deviceList);
+            Device device = new Device(deviceList.size());
+            deviceList.put(Integer.toString(deviceList.size()), device);
+            vbox_device.getChildren().add(device.getAnchorPane());
+            System.out.println(deviceList);
 
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
@@ -128,12 +129,17 @@ public class ControllerTest {
     }
 
     public void start(Event actionEvent) throws MalformedURLException {
+        System.out.println("start event");
 
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
 
+        System.out.println(deviceList);
         deviceList.forEach((k, v) -> {
             v.setSettings(); // записываем настройки в <Device>device
+            System.out.println(v.getToggleButton().isSelected());
             if(v.getToggleButton().isSelected()) {
+
+                System.out.println("start selected");
                 listSnmpAgent.add(getSnmpmanAgent(v.getTypeDevice().toString() + "." + k,
                         getWalk(v),
                         v.getIpDevice(),
@@ -155,6 +161,7 @@ public class ControllerTest {
         String type = v.getTypeDevice().
                 toString().substring(v.getTypeDevice().toString().indexOf('_') + 1); // Тип оборудования после нижнего подчеркивания TypeDevice
 
+        System.out.println(type);
         String filepath;
         if (pwr <= 0) {
             v.getPwrDevice().setText("Enter nominal power");
@@ -171,6 +178,7 @@ public class ControllerTest {
             filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
         }
         File walk = new File(filepath);
+        System.out.println(filepath);
         return walk;
     }
 
