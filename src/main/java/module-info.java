@@ -4,6 +4,7 @@ module ru.rtrs.rtrs_crack {
     requires snmpman;
     requires com.jfoenix;
     requires org.snmp4j;
+    requires lombok;
 
 
     opens ru.rtrs.rtrs_crack to javafx.fxml;
