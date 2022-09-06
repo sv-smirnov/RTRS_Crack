@@ -54,8 +54,6 @@ public class ControllerTest {
     @FXML
     void initialize() {
 
-        System.out.println("start");
-
         keyPwrBtn = false;
 
         primaryPane.setBackground(Background.EMPTY);
@@ -117,29 +115,19 @@ public class ControllerTest {
                 settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == plus) {
-            System.out.println(deviceList);
             Device device = new Device(deviceList.size());
             deviceList.put(Integer.toString(deviceList.size()), device);
             vbox_device.getChildren().add(device.getAnchorPane());
-            System.out.println(deviceList);
-
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
         }
     }
 
     public void start(Event actionEvent) throws MalformedURLException {
-        System.out.println("start event");
-
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
-
-        System.out.println(deviceList);
         deviceList.forEach((k, v) -> {
             v.setSettings(); // записываем настройки в <Device>device
-            System.out.println(v.getToggleButton().isSelected());
             if(v.getToggleButton().isSelected()) {
-
-                System.out.println("start selected");
                 listSnmpAgent.add(getSnmpmanAgent(v.getTypeDevice().toString() + "." + k,
                         getWalk(v),
                         v.getIpDevice(),
@@ -148,8 +136,6 @@ public class ControllerTest {
         });
 
         snmpman = Snmpman.start(listSnmpAgent);
-
-
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_green.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
 
@@ -157,11 +143,9 @@ public class ControllerTest {
 
     private File getWalk(Device v) // файл выбирается в зависимости от типа устройства и мощности
     {
-        int pwr = Integer.parseInt(v.getPortDevice().getText());
+        int pwr = Integer.parseInt(v.getPwrDevice().getText());
         String type = v.getTypeDevice().
                 toString().substring(v.getTypeDevice().toString().indexOf('_') + 1); // Тип оборудования после нижнего подчеркивания TypeDevice
-
-        System.out.println(type);
         String filepath;
         if (pwr <= 0) {
             v.getPwrDevice().setText("Enter nominal power");
@@ -174,11 +158,14 @@ public class ControllerTest {
             filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
         } else  if (pwr < 500) {
             filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
-        } else {
+        } else if (pwr < 1000){
             filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
+        } else if (pwr < 2000){
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "1000v2.walk";
+        } else {
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "2000v2.walk";
         }
         File walk = new File(filepath);
-        System.out.println(filepath);
         return walk;
     }
 
