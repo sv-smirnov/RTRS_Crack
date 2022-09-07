@@ -18,6 +18,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,6 +50,7 @@ public class ControllerTest {
     private Label label_info;
 
     private HashMap<String, Device> deviceList = new HashMap<String, Device>();
+    public static EnumMap<TypeDevice, String[]> powerDevice = new EnumMap<>(TypeDevice.class);
 
 
     @FXML
@@ -86,9 +88,9 @@ public class ControllerTest {
                 "2. Запускаем клиент, настраиваем параметры SNMP агентов\n " +
                 "3. Запускаем эмуляцию\n " +
                 "https://github.com/sv-smirnov/RTRS_Crack");
-        Device device = new Device(deviceList.size());
-        deviceList.put("0", device);
-        vbox_device.getChildren().add(device.getAnchorPane());
+
+        createPowerDevice();
+        addDeviceList();
     }
 
     @FXML
@@ -115,12 +117,16 @@ public class ControllerTest {
                 settingsButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/settings.png"))));
             }
         } else if (event.getTarget() == plus) {
-            Device device = new Device(deviceList.size());
-            deviceList.put(Integer.toString(deviceList.size()), device);
-            vbox_device.getChildren().add(device.getAnchorPane());
+            addDeviceList();
         } else if (event.getTarget() == closeBtn) {
             System.exit(0);
         }
+    }
+
+    private void addDeviceList() {
+        Device device = new Device(deviceList.size());
+        deviceList.put(Integer.toString(deviceList.size()), device);
+        vbox_device.getChildren().add(device.getAnchorPane());
     }
 
     public void start(Event actionEvent) throws MalformedURLException {
@@ -143,12 +149,12 @@ public class ControllerTest {
 
     private File getWalk(Device v) // файл выбирается в зависимости от типа устройства и мощности
     {
-        int pwr = Integer.parseInt(v.getPwrDevice().getText());
+        int pwr = Integer.parseInt(v.getPwrDevice().getValue());
         String type = v.getTypeDevice().
                 toString().substring(v.getTypeDevice().toString().indexOf('_') + 1); // Тип оборудования после нижнего подчеркивания TypeDevice
         String filepath;
         if (pwr <= 0) {
-            v.getPwrDevice().setText("Enter nominal power");
+            v.getPwrDevice().setValue("Enter nominal power");
             return null;
         } else if (pwr < 50) {
             filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
@@ -180,6 +186,20 @@ public class ControllerTest {
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_orange.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaWhite.png"))));
 
+    }
+
+    public void createPowerDevice() {
+        powerDevice.put(TypeDevice.AlmazAntey_HCDVB, new String[]{ "200", "250", "500" });
+        powerDevice.put(TypeDevice.GatesAir_UAXTE, new String[]{ "10", "50", "250", "500" });
+        powerDevice.put(TypeDevice.Harris_UAX, new String[]{ "10", "50", "100", "250", "500" });
+        powerDevice.put(TypeDevice.Harris_ULX, new String[]{ "200", "250", "500", "1000", "2000" });
+        powerDevice.put(TypeDevice.Microtec_TF, new String[]{ "100", "250", "500", "1000", "2000" });
+        powerDevice.put(TypeDevice.Microtec_TTUD, new String[]{ "200", "250", "500" });
+        powerDevice.put(TypeDevice.RS_SxSLx, new String[]{ "10", "50", "100", "250", "500" });
+        powerDevice.put(TypeDevice.RS_THU9x, new String[]{ "1000", "2000" });
+        powerDevice.put(TypeDevice.RS_TLU9x, new String[]{ "50", "100", "250" });
+        powerDevice.put(TypeDevice.RS_TSE800, new String[]{ "none" });
+        powerDevice.put(TypeDevice.Vigintos_TVD, new String[]{ "200", "250", "500" });
     }
 
 

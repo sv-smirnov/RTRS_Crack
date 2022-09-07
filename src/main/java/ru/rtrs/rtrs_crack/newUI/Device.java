@@ -2,13 +2,14 @@ package ru.rtrs.rtrs_crack.newUI;
 
 import com.jfoenix.controls.JFXToggleButton;
 
-import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 
 import java.util.Arrays;
 import java.util.Objects;
+
 
 public class Device {
     private TypeDevice typeDevice;
@@ -17,17 +18,19 @@ public class Device {
     private String port;
     private boolean editable;
     private AnchorPane anchorPane;
-    private TextField pwrDevice;
+    private ComboBox<String> pwrDevice;
     private TextField ipDevice;
     private TextField portDevice;
     private JFXToggleButton toggleButton;
     private ComboBox<TypeDevice> comboBox;
-    public AnchorPane getAnchorPane() {
-        return anchorPane;
-    }
+
 
     public Device(int id) {
         anchorPane = addDevice(id);
+    }
+
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
     }
 
     public TypeDevice getTypeDevice() {
@@ -35,13 +38,13 @@ public class Device {
     }
 
     public void setSettings() {
-        power = getPwrDevice().getText();
+        power = getPwrDevice().getValue();
         ip = getIpDevice().getText();
         port = getPortDevice().getText();
         typeDevice = getTypeDevice();
     }
 
-    public TextField getPwrDevice() {
+    public ComboBox<String> getPwrDevice() {
         return pwrDevice;
     }
 
@@ -63,18 +66,8 @@ public class Device {
 
     public AnchorPane addDevice(Integer id) {
 
-        pwrDevice = new TextField();
-        pwrDevice.setLayoutX(308.0);
-        pwrDevice.setLayoutY(14.0);
-        pwrDevice.setPrefHeight(24.0);
-        pwrDevice.setPrefWidth(69.0);
-        pwrDevice.setId("pwrDevice" + id);
-        pwrDevice.setText("100");
-        pwrDevice.setStyle("-fx-text-inner-color: black;");
-        pwrDevice.setStyle("-fx-background-color: #eda678;");
-
         ipDevice = new TextField();
-        ipDevice.setLayoutX(395.0);
+        ipDevice.setLayoutX(410.0);
         ipDevice.setLayoutY(14.0);
         ipDevice.setPrefHeight(24.0);
         ipDevice.setPrefWidth(144.0);
@@ -84,7 +77,7 @@ public class Device {
         ipDevice.setStyle("-fx-background-color: #eda678;");
 
         portDevice = new TextField();
-        portDevice.setLayoutX(566.0);
+        portDevice.setLayoutX(570.0);
         portDevice.setLayoutY(14.0);
         portDevice.setPrefHeight(24.0);
         portDevice.setPrefWidth(54.0);
@@ -104,6 +97,17 @@ public class Device {
         comboBox.setId("comboBox" + id);
         comboBox.getStylesheets().add(Objects.requireNonNull(Device.class.getResource("/ru/rtrs/rtrs_crack/styleTest.css")).toExternalForm());
         comboBox.setStyle(".combo-box");
+
+        pwrDevice = new ComboBox<>();
+        pwrDevice.setLayoutX(308.0);
+        pwrDevice.setLayoutY(14.0);
+        pwrDevice.setPrefHeight(24.0);
+        pwrDevice.setPrefWidth(87.0);
+        pwrDevice.getItems().addAll(Arrays.asList(ControllerTest.powerDevice.get(comboBox.getValue())));
+        pwrDevice.setId("pwrDevice" + id);
+        pwrDevice.setValue(ControllerTest.powerDevice.get(comboBox.getValue())[0]);
+        pwrDevice.setStyle("-fx-text-inner-color: black;");
+        pwrDevice.setStyle("-fx-background-color: #eda678;");
 
         toggleButton = new JFXToggleButton();
         toggleButton.setLayoutX(200.0);
@@ -131,10 +135,9 @@ public class Device {
         anchorPane.getChildren().add(toggleButton);
 
         comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue == TypeDevice.RS_TSE800) {
-                pwrDevice.setText("none");
-                pwrDevice.setDisable(true);
-            }
+            pwrDevice.getItems().clear();
+            pwrDevice.getItems().addAll(Arrays.asList(ControllerTest.powerDevice.get(comboBox.getValue())));
+            pwrDevice.setValue(ControllerTest.powerDevice.get(comboBox.getValue())[0]);            
         });
 
         return anchorPane;
