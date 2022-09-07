@@ -195,7 +195,6 @@ public class ControllerTest {
         powerDevice.put(TypeDevice.Harris_UAX, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.Harris_ULX, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.Microtec_TF, new String[]{ "30", "100", "250", "500", "1000" });
-        powerDevice.put(TypeDevice.Microtec_TTUD, new String[]{ "200", "250", "500" });
         powerDevice.put(TypeDevice.RS_SxSLx, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.RS_THU9x, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.RS_TLU9x, new String[]{ "50", "100", "250" });
