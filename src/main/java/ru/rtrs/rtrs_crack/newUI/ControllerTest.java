@@ -178,6 +178,7 @@ public class ControllerTest {
     private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
         AgentConfiguration agentConfiguration = new AgentConfiguration(name, null, walk,
                 ip.getText(), Integer.parseInt(port.getText()), "public");
+        System.out.println(walk);
         return new SnmpmanAgent(agentConfiguration);
     }
 
@@ -189,17 +190,17 @@ public class ControllerTest {
     }
 
     public void createPowerDevice() {
-        powerDevice.put(TypeDevice.AlmazAntey_HCDVB, new String[]{ "200", "250", "500" });
+        powerDevice.put(TypeDevice.AlmazAntey_HCDVB, new String[]{ "100", "500" });
         powerDevice.put(TypeDevice.GatesAir_UAXTE, new String[]{ "10", "50", "250", "500" });
         powerDevice.put(TypeDevice.Harris_UAX, new String[]{ "10", "50", "100", "250", "500" });
-        powerDevice.put(TypeDevice.Harris_ULX, new String[]{ "200", "250", "500", "1000", "2000" });
-        powerDevice.put(TypeDevice.Microtec_TF, new String[]{ "100", "250", "500", "1000", "2000" });
+        powerDevice.put(TypeDevice.Harris_ULX, new String[]{ "1000", "2000" });
+        powerDevice.put(TypeDevice.Microtec_TF, new String[]{ "30", "100", "250", "500", "1000" });
         powerDevice.put(TypeDevice.Microtec_TTUD, new String[]{ "200", "250", "500" });
         powerDevice.put(TypeDevice.RS_SxSLx, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.RS_THU9x, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.RS_TLU9x, new String[]{ "50", "100", "250" });
         powerDevice.put(TypeDevice.RS_TSE800, new String[]{ "none" });
-        powerDevice.put(TypeDevice.Vigintos_TVD, new String[]{ "200", "250", "500" });
+        powerDevice.put(TypeDevice.Vigintos_TVD, new String[]{ "50", "100" });
     }
 
 
