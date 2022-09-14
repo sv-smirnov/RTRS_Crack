@@ -160,19 +160,19 @@ public class ControllerTest {
             v.getPwrDevice().setValue("Enter nominal power");
             return null;
         } else if (pwr < 50) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
+            filepath = "walk/" + type + "10v2.walk";
         } else  if (pwr < 100) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "50v2.walk";
+            filepath = "walk/" + type + "50v2.walk";
         } else  if (pwr < 250) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
+            filepath = "walk/" + type + "100v2.walk";
         } else  if (pwr < 500) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
+            filepath = "walk/" + type + "250v2.walk";
         } else if (pwr < 1000){
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
+            filepath = "walk/" + type + "500v2.walk";
         } else if (pwr < 2000){
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "1000v2.walk";
+            filepath = "walk/" + type + "1000v2.walk";
         } else {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "2000v2.walk";
+            filepath = "walk/" + type + "2000v2.walk";
         }
         File walk = new File(filepath);
         return walk;
@@ -201,7 +201,7 @@ public class ControllerTest {
         powerDevice.put(TypeDevice.RS_SxSLx, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.RS_THU9x, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.RS_TLU9x, new String[]{ "50", "100", "250" });
-        powerDevice.put(TypeDevice.RS_TSE800, new String[]{ "none" });
+        powerDevice.put(TypeDevice.RS_TSE800, new String[]{ "1" });
         powerDevice.put(TypeDevice.Vigintos_TVD, new String[]{ "50", "100" });
     }
 
