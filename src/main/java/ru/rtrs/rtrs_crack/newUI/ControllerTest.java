@@ -15,12 +15,11 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ControllerTest {
 
@@ -94,7 +93,7 @@ public class ControllerTest {
     }
 
     @FXML
-    void handleImageAction(MouseEvent event) throws MalformedURLException { // Реакция на нажатие на кнопки
+    void handleImageAction(MouseEvent event) throws IOException { // Реакция на нажатие на кнопки
         if (event.getTarget() == powerButton) { // Кнопка Старт
             if (!keyPwrBtn){
                 keyPwrBtn = true;
@@ -129,8 +128,9 @@ public class ControllerTest {
         vbox_device.getChildren().add(device.getAnchorPane());
     }
 
-    public void start(Event actionEvent) throws MalformedURLException {
+    public void start(Event actionEvent) throws IOException {
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
+        List<String> alias= new ArrayList<String>();
         deviceList.forEach((k, v) -> {
             v.setSettings(); // записываем настройки в <Device>device
             if(v.getToggleButton().isSelected()) {
@@ -138,9 +138,12 @@ public class ControllerTest {
                         getWalk(v),
                         v.getIpDevice(),
                         v.getPortDevice()));
+                alias.add(v.getIpDevice().toString());
             }
         });
 
+        IpConfig.changeIp();
+        IpConfig.addAlias(alias);
         snmpman = Snmpman.start(listSnmpAgent);
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_green.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
