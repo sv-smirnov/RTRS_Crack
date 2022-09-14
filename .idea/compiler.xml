@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RTRS_Crack" target="18" />
+      <module name="RTRS_Crack" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

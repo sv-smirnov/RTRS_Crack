@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Properties;
 
 public class IpConfig {
-    public static void changeIp() throws IOException {
-        InputStream input = new FileInputStream("src/main/resources/config.properties");
+    public static void changeIp() throws IOException, InterruptedException {
+        InputStream input = new FileInputStream("config.properties");
         Properties prop = new Properties();
         prop.load(input);
         String ip = prop.getProperty("ip");
@@ -17,6 +17,7 @@ public class IpConfig {
                 "mask=", mask};
         Process process1 = Runtime.getRuntime().exec(command1);
         printResults(process1);
+
     }
     public static void printResults(Process process) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -25,8 +26,8 @@ public class IpConfig {
             System.out.println(line);
         }
     }
-    public static void addAlias(List<String> alias) throws IOException {
-        InputStream input = new FileInputStream("src/main/resources/config.properties");
+    public static void addAlias(List<String> alias) throws IOException, InterruptedException {
+        InputStream input = new FileInputStream("config.properties");
         Properties prop = new Properties();
         prop.load(input);
         String ip = prop.getProperty("ip");
@@ -36,6 +37,7 @@ public class IpConfig {
              ) {
             Process process = Runtime.getRuntime().exec(new String[]{"netsh", "interface", "ip", "add", "address",
                     interfaceName, aliasIp, mask});
+            printResults(process);
         }
 
     }

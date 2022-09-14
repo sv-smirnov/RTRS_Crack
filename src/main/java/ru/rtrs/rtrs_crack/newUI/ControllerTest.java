@@ -93,7 +93,7 @@ public class ControllerTest {
     }
 
     @FXML
-    void handleImageAction(MouseEvent event) throws IOException { // Реакция на нажатие на кнопки
+    void handleImageAction(MouseEvent event) throws IOException, InterruptedException { // Реакция на нажатие на кнопки
         if (event.getTarget() == powerButton) { // Кнопка Старт
             if (!keyPwrBtn){
                 keyPwrBtn = true;
@@ -128,7 +128,7 @@ public class ControllerTest {
         vbox_device.getChildren().add(device.getAnchorPane());
     }
 
-    public void start(Event actionEvent) throws IOException {
+    public void start(Event actionEvent) throws IOException, InterruptedException {
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
         List<String> alias= new ArrayList<String>();
         deviceList.forEach((k, v) -> {
@@ -138,12 +138,12 @@ public class ControllerTest {
                         getWalk(v),
                         v.getIpDevice(),
                         v.getPortDevice()));
-                alias.add(v.getIpDevice().toString());
+                alias.add(v.getIpDevice().getText());
             }
         });
-
         IpConfig.changeIp();
         IpConfig.addAlias(alias);
+        Thread.sleep(5000);
         snmpman = Snmpman.start(listSnmpAgent);
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_green.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
@@ -181,7 +181,6 @@ public class ControllerTest {
     private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
         AgentConfiguration agentConfiguration = new AgentConfiguration(name, null, walk,
                 ip.getText(), Integer.parseInt(port.getText()), "public");
-        System.out.println(walk);
         return new SnmpmanAgent(agentConfiguration);
     }
 
