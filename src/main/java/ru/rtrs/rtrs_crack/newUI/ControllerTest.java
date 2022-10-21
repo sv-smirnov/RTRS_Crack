@@ -93,7 +93,7 @@ public class ControllerTest {
     }
 
     @FXML
-    void handleImageAction(MouseEvent event) throws IOException { // Реакция на нажатие на кнопки
+    void handleImageAction(MouseEvent event) throws IOException, InterruptedException { // Реакция на нажатие на кнопки
         if (event.getTarget() == powerButton) { // Кнопка Старт
             if (!keyPwrBtn){
                 keyPwrBtn = true;
@@ -128,7 +128,7 @@ public class ControllerTest {
         vbox_device.getChildren().add(device.getAnchorPane());
     }
 
-    public void start(Event actionEvent) throws IOException {
+    public void start(Event actionEvent) throws IOException, InterruptedException {
         List<SnmpmanAgent> listSnmpAgent = new ArrayList<SnmpmanAgent>();
         List<String> alias= new ArrayList<String>();
         deviceList.forEach((k, v) -> {
@@ -138,12 +138,12 @@ public class ControllerTest {
                         getWalk(v),
                         v.getIpDevice(),
                         v.getPortDevice()));
-                alias.add(v.getIpDevice().toString());
+                alias.add(v.getIpDevice().getText());
             }
         });
-
         IpConfig.changeIp();
         IpConfig.addAlias(alias);
+        Thread.sleep(5000);
         snmpman = Snmpman.start(listSnmpAgent);
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_green.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
@@ -160,19 +160,19 @@ public class ControllerTest {
             v.getPwrDevice().setValue("Enter nominal power");
             return null;
         } else if (pwr < 50) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
+            filepath = "walk/" + type + "10v2.walk";
         } else  if (pwr < 100) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "50v2.walk";
+            filepath = "walk/" + type + "50v2.walk";
         } else  if (pwr < 250) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
+            filepath = "walk/" + type + "100v2.walk";
         } else  if (pwr < 500) {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
+            filepath = "walk/" + type + "250v2.walk";
         } else if (pwr < 1000){
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
+            filepath = "walk/" + type + "500v2.walk";
         } else if (pwr < 2000){
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "1000v2.walk";
+            filepath = "walk/" + type + "1000v2.walk";
         } else {
-            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "2000v2.walk";
+            filepath = "walk/" + type + "2000v2.walk";
         }
         File walk = new File(filepath);
         return walk;
@@ -181,7 +181,6 @@ public class ControllerTest {
     private SnmpmanAgent getSnmpmanAgent(String name, File walk, TextField ip, TextField port) {
         AgentConfiguration agentConfiguration = new AgentConfiguration(name, null, walk,
                 ip.getText(), Integer.parseInt(port.getText()), "public");
-        System.out.println(walk);
         return new SnmpmanAgent(agentConfiguration);
     }
 
@@ -198,10 +197,11 @@ public class ControllerTest {
         powerDevice.put(TypeDevice.Harris_UAX, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.Harris_ULX, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.Microtec_TF, new String[]{ "30", "100", "250", "500", "1000" });
+        powerDevice.put(TypeDevice.Microtec_TTUD, new String[]{ "200", "250", "500" });
         powerDevice.put(TypeDevice.RS_SxSLx, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.RS_THU9x, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.RS_TLU9x, new String[]{ "50", "100", "250" });
-        powerDevice.put(TypeDevice.RS_TSE800, new String[]{ "none" });
+        powerDevice.put(TypeDevice.RS_TSE800, new String[]{ "1" });
         powerDevice.put(TypeDevice.Vigintos_TVD, new String[]{ "50", "100" });
     }
 
