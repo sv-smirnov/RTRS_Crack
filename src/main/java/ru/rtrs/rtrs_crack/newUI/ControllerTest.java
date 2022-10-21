@@ -141,9 +141,9 @@ public class ControllerTest {
                 alias.add(v.getIpDevice().getText());
             }
         });
-        IpConfig.changeIp();
-        IpConfig.addAlias(alias);
-        Thread.sleep(5000);
+//        IpConfig.changeIp();
+//        IpConfig.addAlias(alias);
+//        Thread.sleep(5000);
         snmpman = Snmpman.start(listSnmpAgent);
         powerButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/rtrs_green.png"))));
         antennaImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ru/rtrs/rtrs_crack/images/antennaBlue.png"))));
@@ -160,19 +160,19 @@ public class ControllerTest {
             v.getPwrDevice().setValue("Enter nominal power");
             return null;
         } else if (pwr < 50) {
-            filepath = "walk/" + type + "10v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "10v2.walk";
         } else  if (pwr < 100) {
-            filepath = "walk/" + type + "50v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "50v2.walk";
         } else  if (pwr < 250) {
-            filepath = "walk/" + type + "100v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "100v2.walk";
         } else  if (pwr < 500) {
-            filepath = "walk/" + type + "250v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "250v2.walk";
         } else if (pwr < 1000){
-            filepath = "walk/" + type + "500v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "500v2.walk";
         } else if (pwr < 2000){
-            filepath = "walk/" + type + "1000v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "1000v2.walk";
         } else {
-            filepath = "walk/" + type + "2000v2.walk";
+            filepath = "src/main/java/ru/rtrs/rtrs_crack/walk/" + type + "2000v2.walk";
         }
         File walk = new File(filepath);
         return walk;
