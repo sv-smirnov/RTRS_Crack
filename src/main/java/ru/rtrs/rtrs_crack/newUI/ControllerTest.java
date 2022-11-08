@@ -193,7 +193,7 @@ public class ControllerTest {
 
     public void createPowerDevice() {
         powerDevice.put(TypeDevice.AlmazAntey_HCDVB, new String[]{ "100", "500" });
-        powerDevice.put(TypeDevice.GatesAir_UAXTE, new String[]{ "10", "50", "250", "500" });
+        powerDevice.put(TypeDevice.GatesAir_UAXTE, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.Harris_UAX, new String[]{ "10", "50", "100", "250", "500" });
         powerDevice.put(TypeDevice.Harris_ULX, new String[]{ "1000", "2000" });
         powerDevice.put(TypeDevice.Microtec_TF, new String[]{ "30", "100", "250", "500", "1000" });
